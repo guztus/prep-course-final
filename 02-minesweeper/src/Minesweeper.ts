@@ -23,7 +23,7 @@ export class Minesweeper {
     return [
       [new Cell(), new Cell(), new Cell()],
       [new Cell(), new Cell(), new Cell()],
-      [new Cell(), new Cell(), new Cell()]
+      [new Cell(), new Cell(), new Cell()],
     ];
   }
 
@@ -38,7 +38,7 @@ export class Minesweeper {
   }
 
   timePassed(): number {
-    return 999;
+    return 989;
   }
 
   minesLeftCount() {

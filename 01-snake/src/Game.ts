@@ -11,7 +11,7 @@ export interface RuntimeConfiguration {
 export class Game {
   private runtimeConfiguration: RuntimeConfiguration = {
     level: 0,
-    speed: configuration.defaultSpeed
+    speed: configuration.defaultSpeed,
   };
   private score: number = 0;
   private running = true;
@@ -28,6 +28,8 @@ export class Game {
   }
 
   update(time: number) {
+    //console.log(this.checkState());
+
     this.nextTick = time + configuration.defaultSpeed;
 
     this.snake.move();

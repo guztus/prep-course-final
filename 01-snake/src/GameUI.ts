@@ -2,17 +2,15 @@ import configuration from "./configuration";
 import { Game } from "./Game";
 
 const COLORS = {
-  border: "#00AA3E",
-  field: "#36BC67",
-  brand: "#42CB74",
+  field: "#00AA3E",
+  apples: "#F8333C",
+  brand: "#FFFFFF",
   lines: "#E7EBEB",
   snake: {
     eyes: "#FFFFFF",
-    body: "#0A2E36"
-  }
+    body: "#0A2E36",
+  },
 };
-
-const appleIcon = '🍎';
 
 interface CanvasConfiguration {
   cellSize: number;
@@ -49,7 +47,7 @@ class GameUI {
     this.game = game;
     this.canvasConfiguration = {
       cellSize: 24,
-      scale: 2
+      scale: 2,
     };
     requestAnimationFrame(this.draw.bind(this));
 
@@ -62,6 +60,7 @@ class GameUI {
     if (this.game.shouldUpdate(time)) {
       this.drawBackground(context);
       this.drawGrid(context);
+      //this.drawBrand(context);
       this.drawBrand(context);
       this.drawApples(context);
       this.drawSnake(context);
@@ -74,20 +73,30 @@ class GameUI {
   drawBackground(context: CanvasRenderingContext2D) {
     const { width, height } = this.canvas;
 
-    this.canvas.style.border = "5px solid" + COLORS.border;
     context.fillStyle = COLORS.field;
     context.fillRect(0, 0, width, height);
   }
 
   drawBrand(context: CanvasRenderingContext2D) {
     const { width, height } = this.canvas;
+    if (this.game.checkState() === 0) {
+      context.font = height / 4 + "px Roboto";
+      context.textBaseline = "middle";
+      context.textAlign = "center";
+      context.fillStyle = COLORS.brand;
+      //context.fillText("CODELEX", width / 2, height / 2);
+    }
+  }
 
-    context.font = height / 4 + "px Montserrat";
+  /*drawBrand(context: CanvasRenderingContext2D) {
+    const { width, height } = this.canvas;
+
+    context.font = height / 4 + "px Roboto";
     context.textBaseline = "middle";
     context.textAlign = "center";
     context.fillStyle = COLORS.brand;
-    context.fillText("CODELEX", width / 2, height / 2);
-  }
+    //context.fillText("CODELEX", width / 2, height / 2);
+  }*/
 
   drawScore(context: CanvasRenderingContext2D) {
     const { scale } = this.canvasConfiguration;
@@ -123,13 +132,16 @@ class GameUI {
 
   drawApples(context: CanvasRenderingContext2D) {
     const { scale, cellSize } = this.canvasConfiguration;
-    const appleSize = 30 * scale;
+    const lineWidth = 1 * scale;
+
+    context.fillStyle = COLORS.apples;
     const apples = this.game.getField().getApples();
-    context.font = appleSize + 'px serif'
-    apples.forEach(cell =>
-      context.fillText(appleIcon,
-        cellSize * scale * cell.x + cellSize,
-        cellSize * scale * cell.y + cellSize,
+    apples.forEach((cell) =>
+      context.fillRect(
+        cellSize * scale * cell.x + lineWidth,
+        cellSize * scale * cell.y + lineWidth,
+        cellSize * scale - lineWidth * 2,
+        cellSize * scale - lineWidth * 2
       )
     );
   }
@@ -192,7 +204,7 @@ class GameUI {
     // tail
     context.fillStyle = COLORS.snake.body;
     const tail = snake.getTail();
-    tail.forEach(cell =>
+    tail.forEach((cell) =>
       context.fillRect(
         cellSize * scale * cell.x,
         cellSize * scale * cell.y,
@@ -228,7 +240,7 @@ class GameUI {
 new GameUI(
   createCanvas({
     cellSize: 24,
-    scale: 2
+    scale: 2,
   }),
   new Game()
 );
