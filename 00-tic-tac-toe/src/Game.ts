@@ -17,17 +17,23 @@ export class Game {
 
   getWinner(): XO {
     const cells = this.cells;
-    if (cells[0] === cells[1] && cells[1] === cells[2] && cells[0]) {
+    if (cells[0] === cells[1] && cells[1] === cells[2]) {
       return cells[0];
     }
-    if (cells[3] === cells[4] && cells[4] === cells[5] && cells[0]) {
+    if (cells[3] === cells[4] && cells[4] === cells[5]) {
       return cells[3];
     }
-    if (cells[6] === cells[7] && cells[7] === cells[8] && cells[0]) {
+    if (cells[6] === cells[7] && cells[7] === cells[8]) {
       return cells[6];
     }
-    if (cells[0] === cells[3] && cells[3] === cells[6] && cells[0]) {
+    if (cells[0] === cells[3] && cells[3] === cells[6]) {
       return cells[0];
+    }
+    if (cells[1] === cells[4] && cells[4] === cells[7]) {
+      return cells[1];
+    }
+    if (cells[2] === cells[5] && cells[5] === cells[8]) {
+      return cells[2];
     }
     return "-";
   }
@@ -46,6 +52,7 @@ export class Game {
   }
 
   onClick(i: number): void {
+    console.log(i);
     if (this.cells[i] !== "-" || this.getWinner() !== "-") return;
     this.cells[i] = this.turn;
     this.turn = this.turn === "X" ? "O" : "X";

@@ -19,6 +19,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
+    "deasync": "^0.1.28",
     "lodash": "^4.17.15"
   }
 }
