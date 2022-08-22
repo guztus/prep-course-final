@@ -35,6 +35,12 @@ export class Game {
     if (cells[2] === cells[5] && cells[5] === cells[8]) {
       return cells[2];
     }
+    if (cells[0] === cells[4] && cells[4] === cells[8]) {
+      return cells[0];
+    }
+    if (cells[2] === cells[4] && cells[4] === cells[6]) {
+      return cells[2];
+    }
     return "-";
   }
 
@@ -52,7 +58,6 @@ export class Game {
   }
 
   onClick(i: number): void {
-    console.log(i);
     if (this.cells[i] !== "-" || this.getWinner() !== "-") return;
     this.cells[i] = this.turn;
     this.turn = this.turn === "X" ? "O" : "X";
