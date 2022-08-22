@@ -7,8 +7,8 @@ const COLORS = {
   brand: "#FFFFFF",
   lines: "#E7EBEB",
   snake: {
-    eyes: "#FFFFFF",
-    body: "#0A2E36",
+    eyes: "#DAF7D7",
+    body: "#0A5E36",
   },
 };
 
@@ -56,6 +56,7 @@ class GameUI {
   }
 
   draw(time: number) {
+    //console.log(time);
     const context = this.canvas.getContext("2d")!;
     if (this.game.shouldUpdate(time)) {
       this.drawBackground(context);
@@ -148,6 +149,8 @@ class GameUI {
 
   drawSnake(context: CanvasRenderingContext2D) {
     const snake = this.game.getSnake();
+    //let oldDirection = snake.getDirection();
+
     const { scale, cellSize } = this.canvasConfiguration;
     // head
     const size = (cellSize * scale) / 10;

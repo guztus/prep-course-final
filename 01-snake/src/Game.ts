@@ -36,9 +36,11 @@ export class Game {
 
     switch (this.checkState()) {
       case -1:
+        //console.log(this.checkState());
         this.die();
         break;
       case 1:
+        //console.log(this.checkState());
         this.snake.grow();
         this.score += 100;
         this.field.removeApple(this.snake.getHead());

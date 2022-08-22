@@ -7,7 +7,15 @@ export class Snake {
   direction: Direction = "Right";
 
   setDirection(newDirection: Direction) {
-    this.direction = newDirection;
+    if (newDirection === "Left" && this.direction !== "Right") {
+      this.direction = newDirection;
+    } else if (newDirection === "Right" && this.direction !== "Left") {
+      this.direction = newDirection;
+    } else if (newDirection === "Down" && this.direction !== "Up") {
+      this.direction = newDirection;
+    } else if (newDirection === "Up" && this.direction !== "Down") {
+      this.direction = newDirection;
+    }
   }
 
   move() {
